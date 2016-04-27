@@ -1,4 +1,4 @@
-function contruct3dImageScene()
+function [res] = contruct3dImageScene()
 colorDevice = imaq.VideoDevice('kinect',1);
 depthDevice = imaq.VideoDevice('kinect',2);
 
@@ -39,3 +39,4 @@ view(player,ptCloud);
 
 release(colorDevice);
 release(depthDevice);
+res = 0;
