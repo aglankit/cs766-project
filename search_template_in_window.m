@@ -14,7 +14,8 @@ function [rect, max_corr] = search_template_in_window(search_window, src_img)
             width = size(src_img, 2);
             height = size(src_img, 1);
             [hog_w, visualization_s] = extractHOGFeatures(search_window(ymin:ymin+height-1, xmin:xmin+width-1), 'CellSize', [8 8]);
-            temp_corr = abs(corr2(hog_w, hog_s));
+            %temp_corr = abs(1 - pdist2(hog_w, hog_s, 'correlation'));
+            temp_corr = abs(1 - pdist2(hog_w, hog_s, 'cosine'));
             if (temp_corr > max_corr)
                 max_corr = temp_corr;
                 rect(1, 1) = xmin;

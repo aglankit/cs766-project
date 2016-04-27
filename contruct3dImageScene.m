@@ -27,10 +27,11 @@ zlabel(player.Axes,'Z (m)');
 colorImage = step(colorDevice);  
 depthImage = step(depthDevice);
 
-imwrite(depthImage, 'depth1.png');
+imwrite(depthImage, 'depth90.png');
+imwrite(colorImage, 'color90.png');
 
 ptCloud = pcfromkinect(depthDevice,depthImage,colorImage,'depthCentric');
-imwrite(ptCloud.Color, 'color1.png');
+imwrite(ptCloud.Color, 'color90_mapped.png');
 
 view(player,ptCloud);
 %end

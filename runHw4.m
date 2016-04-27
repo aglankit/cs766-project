@@ -19,7 +19,7 @@ temp1 = onCleanup(@()iptsetpref('ImshowBorder', orig_imsetting));
 % FYI challenge1e takes ~4minutes and challenge1f takes ~15mins
 % challenge1f uses IMG_* images
 fun_handles = {@generate_homography_matrix, @read_and_use_homography_matrix, @generate_points, ...
-               @detect_object, @get_homography, @use_kinect_camera};
+               @detect_object, @get_homography, @use_kinect_camera, @get_object_in_color};
 
 % Call test harness
 runTests(varargin, fun_handles);
@@ -29,14 +29,18 @@ function read_and_use_homography_matrix()
     homography = mat_struct.homography_mat;
 
     % temporarily using fixed image
-    orig_img = imread(strcat('temp40.png'));
-    warped_img = imread(strcat('temp90.png'));
-
+    orig_img = imfill(imread(strcat('depth40.png')));
+    warped_img = imfill(imread(strcat('depth90.png')));
+    mapped_color_img = imfill(imread(strcat('color90_mapped.png')));
+    
+    orig_img = convert_image_to_uint8(orig_img);
+    warped_img = convert_image_to_uint8(warped_img);
+    
     % Select Object (Manual for now)
     figure; imshow(orig_img);
     
-    %rect_area = getrect;
-    rect_area = [51  152  118  150];
+    rect_area = getrect;
+    %rect_area = [51  152  118  150];
     xmin      = rect_area(1);
     ymin      = rect_area(2);
     width     = rect_area(3);
@@ -55,7 +59,7 @@ function read_and_use_homography_matrix()
     [search_window, src_img] = get_template_search_image(orig_img, test_pts_nx2, warped_img, dest_pts_nx2);
 
     max_corr = 0;
-    for i = 0.9:-0.1:0.1
+    for i = 0.9:-0.1:0.3
         temp_src_img = imresize(src_img, i);
         [temp_rect, temp_corr] = search_template_in_window(search_window, temp_src_img);
         if temp_corr > max_corr
@@ -69,12 +73,16 @@ function read_and_use_homography_matrix()
     w_width = dest_pts_nx2(3, 1) - dest_pts_nx2(1, 1);
     rect(1, 1) = rect(1, 1) + dest_pts_nx2(1, 1) - w_width/2;
     rect(1, 2) = rect(1, 2) + dest_pts_nx2(1, 2) - w_height/2;
+    rect = round(rect);
     figure; imshow(drawBox(warped_img, rect, 255, 3));
+    figure; 
+    imshow(mapped_color_img(rect(1,2):rect(1,2)+rect(1,4), rect(1,1):rect(1,1)+rect(1,3)));
+    
     
 function use_kinect_camera()
     contruct3dImageScene(); 
-    colorImage = imread('color2_mat.png');
-    depthImage = imread('depth2_mat.png');
+    colorImage = imread('color90.png');
+    depthImage = imread('depth90.png');
     depthImage = flipdim(depthImage ,2);
 
     max_color = double(max(max(depthImage)));
@@ -99,8 +107,8 @@ function use_kinect_camera()
 
 function get_object_in_color()
     %contruct3dImageScene();
-    colorImage = imread('color2_mat.png');
-    depthImage = imread('depth2_mat.png');
+    colorImage = imread('color40_mapped.png');
+    depthImage = imread('depth40.png');
     depthImage = flipdim(depthImage ,2);
 
     max_color = double(max(max(depthImage)));
@@ -132,5 +140,13 @@ function obj_dist = calculate_object_distance(img, object_area)
     object_img = img(ymin:ymin+height, xmin:xmin+width);
     object_img(isnan(object_img)) = 0;
     [row, col, vals] = find(object_img);
-    %obj_dist = mode(object_img(:));
     obj_dist = mode(vals);
+    
+function img = convert_image_to_uint8(orig_img)
+    max_color = double(max(max(orig_img)));
+    img = zeros(size(orig_img));
+    img = uint8(round(255 * double(orig_img)/max_color));
+
+function snap_images()
+    num_pics = 20;
+    
