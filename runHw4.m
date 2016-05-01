@@ -28,14 +28,12 @@ function read_and_use_homography_matrix()
     mat_struct = load('homography_2.mat');
     homography = mat_struct.homography_mat;
 
-    % temporarily using fixed image
-    %orig_img = imfill(imread(strcat('temp40.png')));
-    %warped_img = imfill(imread(strcat('temp90.png')));
-    orig_img = imfill(imread(strcat('calib/depth_52.png')));
+    orig_img = imfill(imread(strcat('calib/depth_62.png')));
     warped_img = imfill(imread(strcat('calib/depth_41.png')));
-    orig_img_c = imfill(imread(strcat('calib/color_52.png')));
+    orig_img_c = imfill(imread(strcat('calib/color_62.png')));
     warped_img_c = imfill(imread(strcat('calib/color_41.png')));
-
+    
+    imshow(orig_img);
     orig_img_u = orig_img;
     warped_img_u = warped_img;
     
@@ -43,16 +41,16 @@ function read_and_use_homography_matrix()
     warped_img = convert_image_to_uint8(warped_img);
     
     % Select Object (Manual for now)
-    figure; imshow(orig_img);
+    %figure; imshow(orig_img);
     %rect_area = getrect;
-    rect_area = [223   86   96   88];
+    rect_area = [235   86   96   88];
     xmin      = rect_area(1);
     ymin      = rect_area(2);
     width     = rect_area(3);
     height    = rect_area(4);
 
     init_img = drawBox(orig_img, rect_area, 255, 3, 0);
-    figure; imshow(init_img);
+    %figure; imshow(init_img);
     imwrite(init_img, 'init_img.png');
     disp(rect_area);
     
@@ -93,7 +91,7 @@ function read_and_use_homography_matrix()
     obj_dist = calculate_object_distance(warped_img_u, rect);
     
     % y, x format
-    color_points_far = [356, 960; 550, 960; 550, 1168; 356, 1168];
+    color_points_far = [356, 940; 550, 940; 550, 1148; 356, 1148];
     imwrite(drawBox_color(warped_img_c, [color_points_far(1, 2), color_points_far(1, 1), ...
             color_points_far(3, 2) - color_points_far(1, 2), color_points_far(3, 1) - color_points_far(1, 1)], [255, 0, 0], 3), 'inter/color_far.png');
     
@@ -183,7 +181,9 @@ function obj_dist = calculate_object_distance(img, object_area)
     obj_dist = mode(vals);
     
 function img = convert_image_to_uint8(orig_img)
+    figure; imshow(orig_img);
     max_color = double(max(max(orig_img)));
     img = zeros(size(orig_img));
     img = uint8(round(255 * double(orig_img)/max_color));
+    figure; imshow(img);
     
