@@ -8,7 +8,7 @@ function [rect, max_corr] = search_template_in_window(warped_img, dest_pts_nx2, 
     w_xmin = max(1, dest_pts_nx2(1, 1) - w_width/2);
     w_xmax = min(size(warped_img, 2), dest_pts_nx2(3, 1) + w_width/2);
 
-    base_img = drawBox(warped_img, [w_xmin, w_ymin, w_xmax - w_xmin, w_ymax - w_ymin], 255, 3);
+    base_img = drawBox(warped_img, [w_xmin, w_ymin, w_xmax - w_xmin, w_ymax - w_ymin], 255, 3, 0);
     figure; imshow(base_img);
     
     max_corr = 0.0;
@@ -17,8 +17,8 @@ function [rect, max_corr] = search_template_in_window(warped_img, dest_pts_nx2, 
     j_max = size(search_window, 2) - size(src_img, 2);
     iter = 0;
     figure;
-    for i = 1:8:i_max
-        for j = 1:8:j_max
+    for i = 4:8:i_max-4
+        for j = 4:8:j_max-4
             xmin = j;
             ymin = i;
             width = size(src_img, 2);
@@ -26,7 +26,7 @@ function [rect, max_corr] = search_template_in_window(warped_img, dest_pts_nx2, 
             [hog_w, visualization_s] = extractHOGFeatures(search_window(ymin:ymin+height-1, xmin:xmin+width-1), 'CellSize', [8 8]);
             %temp_corr = abs(1 - pdist2(hog_w, hog_s, 'correlation'));
             temp_corr = abs(1 - pdist2(hog_w, hog_s, 'correlation'));
-            inter_img = drawBox(base_img, [w_xmin + j, w_ymin + i, width, height], 255, 3);
+            inter_img = drawBox(base_img, [w_xmin + j, w_ymin + i, width, height], 140, 3, 1);
             imwrite(inter_img, ['inter/img-' int2str(iter) '.png']);
             if (temp_corr > max_corr)
                 max_corr = temp_corr;
@@ -39,5 +39,5 @@ function [rect, max_corr] = search_template_in_window(warped_img, dest_pts_nx2, 
         end
     end
     
-    imwrite(drawBox(base_img, [w_xmin + rect(1, 1), w_ymin + rect(1, 2), width, height], 255, 3), ['inter/img-final.png']);
+    imwrite(drawBox(base_img, [w_xmin + rect(1, 1), w_ymin + rect(1, 2), width, height], 140, 3, 1), 'inter/img-final.png');
     %imshow(drawBox(search_window, [j, i, width, height], 255, 3));

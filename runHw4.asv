@@ -51,7 +51,7 @@ function read_and_use_homography_matrix()
     width     = rect_area(3);
     height    = rect_area(4);
 
-    init_img = drawBox(orig_img, rect_area, 255, 3);
+    init_img = drawBox(orig_img, rect_area, 255, 3, 0);
     figure; imshow(init_img);
     imwrite(init_img, 'init_img.png');
     disp(rect_area);
@@ -89,10 +89,13 @@ function read_and_use_homography_matrix()
     rect(1, 1) = rect(1, 1) + dest_pts_nx2(1, 1) - w_width/2;
     rect(1, 2) = rect(1, 2) + dest_pts_nx2(1, 2) - w_height/2;
     rect = round(rect);
-    figure; imshow(drawBox(warped_img, rect, 255, 3));
+    figure; imshow(drawBox(warped_img, rect, 255, 3, 0));
     obj_dist = calculate_object_distance(warped_img_u, rect);
-    color_points_far = [356, 943; 550, 943; 550, 1151; 356, 1151];
-    imwrite(drawBox_color(warped_img_c));
+    
+    % y, x format
+    color_points_far = [356, 960; 550, 960; 550, 1158; 356, 1158];
+    imwrite(drawBox_color(warped_img_c, [color_points_far(1, 2), color_points_far(1, 1), ...
+            color_points_far(3, 2) - color_points_far(1, 2), color_points_far(3, 1) - color_points_far(1, 1)], [255, 0, 0], 3), 'inter/color_far.png');
     
     figure; imshow(warped_img_c);
     hold on; plot(color_points_far(:,2), color_points_far(:,1), 'ws', 'MarkerFaceColor', [1 1 1]);

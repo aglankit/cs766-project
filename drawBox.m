@@ -1,4 +1,4 @@
-function img = drawBox(img, rect, color, thickness)
+function img = drawBox(img, rect, color, thickness, type)
 % drawBox draws a box on the input image
 % 
 % arguments:
@@ -60,7 +60,17 @@ oh = size(outter_patch, 1); ow = size(outter_patch, 2);
 %                                     ones(oh, ow, 1, 1) * rgb(2),...
 %                                     ones(oh, ow, 1, 1) * rgb(3)); 
 
-outter_box = ones(oh, ow) * color;
+if type == 0
+    outter_box = ones(oh, ow) * color;
+else
+    outter_box = ones(oh, ow) * color;
+    for i = 4:8:ow-8
+        outter_box(:, i:i+3) = 0;
+    end
+    for i = 4:8:oh-8
+        outter_box(i:i+3, :) = 0;
+    end
+end
 
 switch class(img)
     case 'double'
