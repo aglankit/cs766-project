@@ -16,3 +16,20 @@ c:\users\achin\documents\visual studio 2015\Projects\mapping\mapping\obj\Debug\m
 c:\users\achin\documents\visual studio 2015\Projects\mapping\mapping\obj\Debug\mapping.csproj.GenerateResource.Cache
 c:\users\achin\documents\visual studio 2015\Projects\mapping\mapping\obj\Debug\mapping.exe
 c:\users\achin\documents\visual studio 2015\Projects\mapping\mapping\obj\Debug\mapping.pdb
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\bin\Debug\mapping.exe.config
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\Interop.MLApp.dll
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\mapping.csproj.ResolveComReference.cache
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\mapping.exe
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\mapping.pdb
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\bin\Debug\mapping.exe
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\bin\Debug\mapping.pdb
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\bin\Debug\Microsoft.Kinect.xml
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\mapping.csprojResolveAssemblyReference.cache
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\MainWindow.g.cs
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\App.g.cs
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\mapping_MarkupCompile.cache
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\mapping_MarkupCompile.lref
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\MainWindow.baml
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\mapping.g.resources
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\mapping.Properties.Resources.resources
+C:\Users\ankit\Desktop\Acads\766\CS766_Project\cs766-project\csharpmapping\mapping\obj\Debug\mapping.csproj.GenerateResource.Cache

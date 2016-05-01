@@ -46,11 +46,13 @@ namespace mapping
 
             // Define the output 
             object result = null;
+            
             // TODO
             matlab.Feval("contruct3dImageScene", 0, out result);
             // Call the MATLAB function myfunc
             result = null;
-            matlab.Feval("depthToColorPoint", 3, out result);
+
+            // matlab.Feval("depthToColorPoint", 3, out result);
 
             // Display result 
             object[] res = result as object[];
