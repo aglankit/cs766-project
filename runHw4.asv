@@ -93,7 +93,7 @@ function read_and_use_homography_matrix()
     obj_dist = calculate_object_distance(warped_img_u, rect);
     
     % y, x format
-    color_points_far = [356, 960; 550, 960; 550, 1158; 356, 1158];
+    color_points_far = [356, 960; 550, 960; 550, 1168; 356, 1168];
     imwrite(drawBox_color(warped_img_c, [color_points_far(1, 2), color_points_far(1, 1), ...
             color_points_far(3, 2) - color_points_far(1, 2), color_points_far(3, 1) - color_points_far(1, 1)], [255, 0, 0], 3), 'inter/color_far.png');
     
@@ -110,8 +110,8 @@ function read_and_use_homography_matrix()
     figure; imshow(color_obj_near);
     
     out_img = zeros(size(orig_img_c));
-    
-    out_img(color_points_near(1,2):color_points_near(1,2)+ size(color_points_near, 1), color_points_near(1,1):color_points_near(1,1) + size(color_points_near, 2), :) = color_obj_near(:,:,:);
+    out_img(color_points_near(1,1):color_points_near(1,1) + size(color_obj_near, 1) - 1, color_points_near(1,2):color_obj_near(1,2) + size(color_obj_near, 2) - 1, :) = 1;
+    %out_img(color_points_near(1,1):color_points_near(1,1)+ size(color_obj_near, 1) - 1, color_points_near(1,2):color_obj_near(1,2) + size(color_obj_near, 2) - 1, :) = 1;
     figure; imshow(out_img); 
     
 function use_kinect_camera()

@@ -108,11 +108,16 @@ function read_and_use_homography_matrix()
     tform = projective2d(color_homography');
     color_obj_near = imwarp(color_obj_far, tform);
     figure; imshow(color_obj_near);
-    
     out_img = zeros(size(orig_img_c));
-    
-    out_img(color_points_near(1,2):color_points_near(1,2)+ size(color_points_near, 1), color_points_near(1,1):color_points_near(1,1) + size(color_points_near, 2), :) = color_obj_near(:,:,:);
-    figure; imshow(out_img); 
+    out_img(color_points_near(1,1):color_points_near(1,1) + size(color_obj_near, 1) - 1, ...
+            color_points_near(1,2):color_points_near(1,2) + size(color_obj_near, 2) - 1, 1) = color_obj_near(:,:,1);
+    out_img(color_points_near(1,1):color_points_near(1,1) + size(color_obj_near, 1) - 1, ...
+            color_points_near(1,2):color_points_near(1,2) + size(color_obj_near, 2) - 1, 2) = color_obj_near(:,:,2);
+    out_img(color_points_near(1,1):color_points_near(1,1) + size(color_obj_near, 1) - 1, ...
+            color_points_near(1,2):color_points_near(1,2) + size(color_obj_near, 2) - 1, 3) = color_obj_near(:,:,3);
+    out_img = uint8(out_img);
+    %out_img(color_points_near(1,1):color_points_near(1,1)+ size(color_obj_near, 1) - 1, color_points_near(1,2):color_obj_near(1,2) + size(color_obj_near, 2) - 1, :) = 1;
+    imwrite(out_img, 'regenerated_img.png'); 
     
 function use_kinect_camera()
     contruct3dImageScene(); 
