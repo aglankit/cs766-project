@@ -41,13 +41,11 @@ thickness = (thickness-1)/2;
 
 % fill the outter box
 % boundary condition check
-%y-t:y+h-1+t, x-t:x+w-1+t
 oy_start = max(1, y-thickness); oy_end = min(img_h, y+h-1+thickness);
 ox_start = max(1, x-thickness); ox_end = min(img_w, x+w-1+thickness);
 outter_patch = img(oy_start:oy_end, ox_start:ox_end, :);
 
 % put the inner box back
-%y+t+1:y+h-t-2, x+t+1:x+w-t-2
 iy_start = max(1, y+thickness+1); iy_end = min(img_h, y+h-thickness-2);
 ix_start = max(1, x+thickness+1); ix_end = min(img_w, x+w-thickness-2);
 inner_patch = img(iy_start:iy_end, ix_start:ix_end, :);

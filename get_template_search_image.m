@@ -16,4 +16,3 @@ ymax = min(size(orig_img, 1), test_pts_nx2(3, 2));
 xmin = max(1, test_pts_nx2(1, 1));
 xmax = min(size(orig_img, 2), test_pts_nx2(3, 1));
 src_img = imfill(orig_img(ymin:ymax, xmin:xmax));
-disp(size(src_img));

@@ -3,7 +3,11 @@ function generate_homography_matrix()
     % 1->105; 18->20
     % size of box: 10.5x7
     % All dim in inches
-
+    
+    % Generate the saved homography matrix. The user is required to pick
+    % the object in the displayed images and the function will build all
+    % the homography combinations.
+    
     images = 18;
     n = 4;
     point_mat = zeros(n, 2, images);
@@ -28,5 +32,5 @@ function generate_homography_matrix()
         end
     end
 
-    save('points.mat', 'point_mat');
-    save('homography.mat', 'homography_mat');
+    save('points_2.mat', 'point_mat');
+    save('homography_2.mat', 'homography_mat');

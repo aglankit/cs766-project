@@ -1,7 +1,0 @@
-
-
-
-function invert_images(src_dir, dst_dir, filename)
-    img = imread([src_dir '/' filename]);
-    img = flipdim(img, 2);
-    imwrite(img, [dst_dir '/' filename]);

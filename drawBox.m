@@ -56,9 +56,6 @@ inner_patch = img(iy_start:iy_end, ix_start:ix_end, :);
 % the type of the outter box has to match the type of the image
 
 oh = size(outter_patch, 1); ow = size(outter_patch, 2);
-% outter_box = cat(3, ones(oh, ow, 1) * rgb(1),...
-%                                     ones(oh, ow, 1, 1) * rgb(2),...
-%                                     ones(oh, ow, 1, 1) * rgb(3)); 
 
 if type == 0
     outter_box = ones(oh, ow) * color;
